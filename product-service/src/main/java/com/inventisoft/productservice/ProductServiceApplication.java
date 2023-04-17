@@ -8,7 +8,7 @@ package com.inventisoft.productservice;
 *@version 21:11 12 April 2023
 *@see <a href=ProductServiceApplication.java#Package>Java-SpringBoot</a>
 *@see com.inventisoft.product
-*@since ver 1.0
+*@since ver 1.2
 *@deprecate As of ver 0.0
 */
 import org.springframework.boot.SpringApplication;

@@ -1,6 +1,5 @@
 package com.inventisoft.productservice.entity;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -31,12 +30,6 @@ public class Product {
 	@Column(name = "name", columnDefinition = "varchar(255)", nullable = false)
 	private String name;
 	
-	@Column(name = "price_before", columnDefinition = "decimal(10,2)", nullable = false)
-	private BigDecimal priceBefore;
-	
-	@Column(name = "price_after", columnDefinition = "decimal(10,2)", nullable = true)
-	private BigDecimal priceAfter;
-	
 	@Column(name = "short_description", columnDefinition = "varchar(500)", nullable = false)
 	private String shortDescription;
 	
@@ -46,16 +39,10 @@ public class Product {
 	@Column(name = "additional_information", columnDefinition = "varchar(3000)", nullable = false)
 	private String additionalInformation;
 	
-	@Column(name = "size", columnDefinition = "varchar(100)", nullable = false)
-	private String size;
-	
-	@Column(name = "color", columnDefinition = "varchar(50)", nullable = false)
-	private String color;
-	
 	@Column(name = "brand", columnDefinition = "varchar(50)", nullable = false)
 	private String brand;
 	
-	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
+	@Column(name = "create_at", columnDefinition = "timestamp", nullable = true)
 	private Timestamp createdAt;
 
 	public Integer getId() {
@@ -82,22 +69,6 @@ public class Product {
 		this.name = name;
 	}
 
-	public BigDecimal getPriceBefore() {
-		return priceBefore;
-	}
-
-	public void setPriceBefore(BigDecimal priceBefore) {
-		this.priceBefore = priceBefore;
-	}
-
-	public BigDecimal getPriceAfter() {
-		return priceAfter;
-	}
-
-	public void setPriceAfter(BigDecimal priceAfter) {
-		this.priceAfter = priceAfter;
-	}
-
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -122,22 +93,6 @@ public class Product {
 		this.additionalInformation = additionalInformation;
 	}
 
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
 	public String getBrand() {
 		return brand;
 	}
@@ -153,5 +108,6 @@ public class Product {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
+	
+	
 }

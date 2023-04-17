@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inventisoft.productservice.entity.Product;
 import com.inventisoft.productservice.service.ProductService;
+import com.inventisoft.productservice.vo.ProductVo;
 
 /**
  * Class controller, post, get, delete, update product
@@ -35,6 +36,10 @@ public class ProductController {
 		this.productService = productservice;
 	}
 	
+	/**
+	 * path:get all products
+	 * @return
+	 */
 	@GetMapping("/products")
 	public ResponseEntity<List<Product>> listProduct(){
 		List<Product> product = productService.getAll();
@@ -44,6 +49,11 @@ public class ProductController {
 		return ResponseEntity.ok(product);
 	}
 	
+	/**
+	 * Path: get products by id
+	 * @param productId
+	 * @return
+	 */
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable("id") int productId){
 		Product product = productService.getProductById(productId);
@@ -53,12 +63,21 @@ public class ProductController {
 		return ResponseEntity.ok(product);
 	}
 	
+	/**
+	 * Path: Save product
+	 * @param product
+	 * @return
+	 */
 	@PostMapping("/product")
 	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
 		Product newProduct = productService.saveProduct(product);
 		return ResponseEntity.ok(newProduct);
 	}
 	
+	/**shortDescription
+	 * Path: Delete product, request id product
+	 * @param productId
+	 */
 	@DeleteMapping("/product/{id}")
 	public void deleteProduct(@PathVariable("id") int productId) {
 		Product product = this.productService.getProductById(productId);
@@ -67,13 +86,25 @@ public class ProductController {
 		}
 	}
 	
-	@PutMapping("/product")
-	public ResponseEntity<Product> updateProduct(@PathVariable("id") int productId){
-		Product product = this.productService.getProductById(productId);
+	/**
+	 * Path: Update product, request id product
+	 * @param id
+	 * @param productvo
+	 * @return
+	 */
+	@PutMapping("/product/{id}")
+	public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, ProductVo productvo){
+		Product product = this.productService.getProductById(id);
 		if(product == null) {
-			return ResponseEntity.notFound().build();
+			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}else {
+			product.setCode(productvo.getCode());
+			product.setName(productvo.getName());
+			product.setShortDescription(productvo.getName());
+			product.setLongDescription(productvo.getLongDescription());
+			product.setAdditionalInformation(productvo.getAdditionalInformation());
+			product.setBrand(productvo.getBrand());
 		}
-		return new ResponseEntity<Product>(this.productService.updateProduct(product), HttpStatus.OK);
+		return new ResponseEntity<>(this.productService.updateProduct(product), HttpStatus.OK);
 	}
 }
