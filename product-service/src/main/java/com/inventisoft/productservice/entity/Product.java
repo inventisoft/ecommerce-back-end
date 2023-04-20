@@ -51,11 +51,6 @@ public class Product {
 	
 	@Column(name = "create_at", columnDefinition = "timestamp", nullable = true)
 	private Timestamp createdAt;
-	
-	/**
-	 * Getters and setters product
-	 * @return
-	 */
 
 	public Integer getId() {
 		return id;
@@ -128,5 +123,10 @@ public class Product {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	/**
+	 * Getters and setters product
+	 * @return
+	 */
 	
 }

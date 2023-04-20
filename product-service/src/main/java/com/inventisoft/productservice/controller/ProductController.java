@@ -24,7 +24,6 @@ import com.inventisoft.productservice.vo.ProductVo;
  * @author atthort-arch
  *
  */
-
 @RestController
 @RequestMapping("/api")
 public class ProductController {
