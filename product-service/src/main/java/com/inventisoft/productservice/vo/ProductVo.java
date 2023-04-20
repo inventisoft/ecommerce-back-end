@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 
 /**
+ * Virtual object product
  * @author atthort-arch
  *
  */
@@ -15,6 +16,9 @@ import javax.persistence.Column;
 public class ProductVo {
 	@Column(name = "product_id", columnDefinition = "bigint", nullable = false)
 	private Integer id;
+	
+	@Column(name = "category_id", columnDefinition = "integer", nullable = false)
+	private Integer categoryId;
 	
 	@Column(name = "code", columnDefinition = "varchar(50)", nullable = false)
 	private String code;
@@ -43,6 +47,14 @@ public class ProductVo {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCode() {
@@ -100,6 +112,5 @@ public class ProductVo {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
 	
 }

@@ -98,6 +98,7 @@ public class ProductController {
 		if(product == null) {
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}else {
+			product.setCategoryId(productvo.getCategoryId());
 			product.setCode(productvo.getCode());
 			product.setName(productvo.getName());
 			product.setShortDescription(productvo.getName());

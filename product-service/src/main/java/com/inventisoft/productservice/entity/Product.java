@@ -20,9 +20,16 @@ import javax.persistence.Id;
 public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	/**
+	 * Tables properties
+	 */
 	
 	@Column(name = "product_id", columnDefinition = "bigint", nullable = false)
 	private Integer id;
+	
+	@Column(name = "category_id", columnDefinition = "integer", nullable = false)
+	private Integer categoryId;
 	
 	@Column(name = "code", columnDefinition = "varchar(50)", nullable = false)
 	private String code;
@@ -44,6 +51,11 @@ public class Product {
 	
 	@Column(name = "create_at", columnDefinition = "timestamp", nullable = true)
 	private Timestamp createdAt;
+	
+	/**
+	 * Getters and setters product
+	 * @return
+	 */
 
 	public Integer getId() {
 		return id;
@@ -51,6 +63,14 @@ public class Product {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCode() {
@@ -108,6 +128,5 @@ public class Product {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	
 	
 }
