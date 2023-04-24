@@ -1,5 +1,6 @@
 package com.inventisoft.productservice.service;
 
+import com.inventisoft.productservice.dto.ProductDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ import com.inventisoft.productservice.repository.ProductRepository;
 
 @Service
 public class ProductService {
-	
+
 	@Autowired
 	private ProductRepository productRepository;
-	
+
 	/**
 	 * 	List all products
 	 * @param Product(entity)
@@ -30,7 +31,7 @@ public class ProductService {
 	public List<Product> getAll(){
 		return productRepository.findAll();
 	}
-	
+
 	/**
 	 * Find product by product_id
 	 * @param id
@@ -38,20 +39,21 @@ public class ProductService {
 	 */
 	public Product getProductById(int id) {
 		return productRepository.findById(id).orElse(null);
-		
+
 	}
-	
+
 	/**
 	 * Save product
-	 * @param product(entity)
+	 * @param productDTO(entity)
 	 * @return
 	 */
 	@Transactional
-	public Product saveProduct(Product product) {
+	public Product saveProduct(ProductDTO productDTO) {
+		Product product = productDtoToProduct(productDTO);
 		Product newProduct = productRepository.save(product);
 		return newProduct;
 	}
-	
+
 	/**
 	 * Update product
 	 * @param product
@@ -60,8 +62,8 @@ public class ProductService {
 	@Transactional
 	public Product updateProduct(Product product) {
 		return this.productRepository.save(product);
-	} 
-	
+	}
+
 	/**
 	 * Delete product
 	 * @param product
@@ -69,6 +71,19 @@ public class ProductService {
 	@Transactional
 	public void deleteProduct(Product product) {
 		this.productRepository.delete(product);
+	}
+
+
+	private Product productDtoToProduct(ProductDTO productDTO){
+		Product product = new Product();
+		product.setCategoryId(productDTO.getCategoryId());
+		product.setBrand(productDTO.getBrand());
+		product.setCode(productDTO.getCode());
+		product.setName(productDTO.getName());
+		product.setShortDescription(productDTO.getShortDescription());
+		product.setAdditionalInformation(productDTO.getAdditionalInformation());
+		product.setLongDescription(productDTO.getLongDescription());
+		return product;
 	}
 
 }

@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Entity Product
@@ -16,15 +19,13 @@ import javax.persistence.Id;
  */
 
 @Entity 
-@javax.persistence.Table(name = "is_product")
+@Table(name = "is_product")
+@Getter
+@Setter
 public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 
-	/**
-	 * Tables properties
-	 */
-	
 	@Column(name = "product_id", columnDefinition = "bigint", nullable = false)
 	private Integer id;
 	
@@ -52,81 +53,4 @@ public class Product {
 	@Column(name = "create_at", columnDefinition = "timestamp", nullable = true)
 	private Timestamp createdAt;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
-
-	public String getLongDescription() {
-		return longDescription;
-	}
-
-	public void setLongDescription(String longDescription) {
-		this.longDescription = longDescription;
-	}
-
-	public String getAdditionalInformation() {
-		return additionalInformation;
-	}
-
-	public void setAdditionalInformation(String additionalInformation) {
-		this.additionalInformation = additionalInformation;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-	
-	/**
-	 * Getters and setters product
-	 * @return
-	 */
-	
 }

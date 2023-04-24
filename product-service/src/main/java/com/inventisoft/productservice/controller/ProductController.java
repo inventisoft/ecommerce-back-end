@@ -1,5 +1,6 @@
 package com.inventisoft.productservice.controller;
 
+import com.inventisoft.productservice.dto.ProductDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,7 @@ public class ProductController {
 	 * @return
 	 */
 	@PostMapping("/product")
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+	public ResponseEntity<Product> saveProduct(@RequestBody ProductDTO product){
 		Product newProduct = productService.saveProduct(product);
 		return ResponseEntity.ok(newProduct);
 	}
