@@ -1,5 +1,6 @@
 package com.inventisoft.productservice.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductDTO {
 
   private Integer id;
@@ -17,4 +19,5 @@ public class ProductDTO {
   private String longDescription;
   private String additionalInformation;
   private String brand;
+
 }

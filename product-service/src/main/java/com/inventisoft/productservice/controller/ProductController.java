@@ -28,14 +28,14 @@ import com.inventisoft.productservice.vo.ProductVo;
 @RestController
 @RequestMapping("/api")
 public class ProductController {
-	
+
 	@Autowired
 	private final ProductService productService;
-	
+
 	public ProductController(ProductService productservice) {
 		this.productService = productservice;
 	}
-	
+
 	/**
 	 * path:get all products
 	 * @return
@@ -48,7 +48,7 @@ public class ProductController {
 		}
 		return ResponseEntity.ok(product);
 	}
-	
+
 	/**
 	 * Path: get products by id
 	 * @param productId
@@ -62,7 +62,7 @@ public class ProductController {
 		}
 		return ResponseEntity.ok(product);
 	}
-	
+
 	/**
 	 * Path: Save product
 	 * @param product
@@ -70,10 +70,12 @@ public class ProductController {
 	 */
 	@PostMapping("/product")
 	public ResponseEntity<Product> saveProduct(@RequestBody ProductDTO product){
+		System.out.println("test");
+		System.out.println(product.toString());
 		Product newProduct = productService.saveProduct(product);
 		return ResponseEntity.ok(newProduct);
 	}
-	
+
 	/**shortDescription
 	 * Path: Delete product, request id product
 	 * @param productId
@@ -85,27 +87,27 @@ public class ProductController {
 			this.productService.deleteProduct(product);
 		}
 	}
-	
+
 	/**
 	 * Path: Update product, request id product
 	 * @param id
 	 * @param productvo
 	 * @return
 	 */
-	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, ProductVo productvo){
-		Product product = this.productService.getProductById(id);
-		if(product == null) {
-			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
-		}else {
-			product.setCategoryId(productvo.getCategoryId());
-			product.setCode(productvo.getCode());
-			product.setName(productvo.getName());
-			product.setShortDescription(productvo.getName());
-			product.setLongDescription(productvo.getLongDescription());
-			product.setAdditionalInformation(productvo.getAdditionalInformation());
-			product.setBrand(productvo.getBrand());
-		}
-		return new ResponseEntity<>(this.productService.updateProduct(product), HttpStatus.OK);
-	}
+//	@PutMapping("/product/{id}")
+//	public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, ProductVo productvo){
+//		Product product = this.productService.getProductById(id);
+//		if(product == null) {
+//			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+//		}else {
+//			product.setCategoryId(productvo.getCategoryId());
+//			product.setCode(productvo.getCode());
+//			product.setName(productvo.getName());
+//			product.setShortDescription(productvo.getName());
+//			product.setLongDescription(productvo.getLongDescription());
+//			product.setAdditionalInformation(productvo.getAdditionalInformation());
+//			product.setBrand(productvo.getBrand());
+//		}
+//		return new ResponseEntity<>(this.productService.updateProduct(product), HttpStatus.OK);
+//	}
 }

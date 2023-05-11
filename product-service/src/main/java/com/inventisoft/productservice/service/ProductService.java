@@ -1,6 +1,7 @@
 package com.inventisoft.productservice.service;
 
 import com.inventisoft.productservice.dto.ProductDTO;
+import com.inventisoft.productservice.mapper.ProductMapper;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+
 
 	/**
 	 * 	List all products
@@ -49,7 +51,7 @@ public class ProductService {
 	 */
 	@Transactional
 	public Product saveProduct(ProductDTO productDTO) {
-		Product product = productDtoToProduct(productDTO);
+		Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
 		Product newProduct = productRepository.save(product);
 		return newProduct;
 	}
@@ -74,16 +76,6 @@ public class ProductService {
 	}
 
 
-	private Product productDtoToProduct(ProductDTO productDTO){
-		Product product = new Product();
-		product.setCategoryId(productDTO.getCategoryId());
-		product.setBrand(productDTO.getBrand());
-		product.setCode(productDTO.getCode());
-		product.setName(productDTO.getName());
-		product.setShortDescription(productDTO.getShortDescription());
-		product.setAdditionalInformation(productDTO.getAdditionalInformation());
-		product.setLongDescription(productDTO.getLongDescription());
-		return product;
-	}
+
 
 }
