@@ -20,16 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author Hector Ajumado
+ * @author atthort-arch
  */
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api")
 public class CategoryController {
     
     @Autowired
     private CategoryService categoryService;
     
-    @GetMapping("/")
+    @GetMapping("/categories")
     public List<CategoryDto> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         List<CategoryDto> categoryDtos = new ArrayList<>();
@@ -41,23 +42,23 @@ public class CategoryController {
         return categoryDtos;
     }
     
-    @PostMapping("/create")
+    @PostMapping("/category")
     public Category addCategory(@RequestBody Category category) {
         return categoryService.addCategory(category);
     }
     
-    @DeleteMapping("/{categoryId}")
+    @DeleteMapping("/category/{categoryId}")
     public void deleteCategory(@PathVariable int categoryId) {
         categoryService.deleteCategory(categoryId);
     }
     
-    @PutMapping("/{categoryId}")
+    @PutMapping("/category/{categoryId}")
     public Category updateCategory(@PathVariable int categoryId, @RequestBody Category category) {
         category.setId(categoryId);
         return categoryService.updateCategory(category);
     }
     
-    @GetMapping("/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public Category getCategoryById(@PathVariable int categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
