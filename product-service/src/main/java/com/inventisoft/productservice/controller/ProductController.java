@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.inventisoft.productservice.dto.ProductDto;
+import com.inventisoft.productservice.dto.ProductDTO;
 import com.inventisoft.productservice.entity.Product;
 import com.inventisoft.productservice.service.ProductService;
 
@@ -34,17 +34,11 @@ public class ProductController {
 	 * Get all products
 	 * @return
 	 */
-	@GetMapping("/products")
-	public List<ProductDto> getAllProduct() {
-        List<Product> product = productService.getAllProducts();
-        List<ProductDto> productDtos = new ArrayList<>();
-
-        for (Product products : product) {
-            productDtos.add(new ProductDto());
-        }
-
-        return productDtos;
-    }
+  @GetMapping("/products")
+  public List<ProductDTO> getAllProduct() {
+    List<ProductDTO> products = productService.getAllProducts();
+    return products;
+  }
 	
 	/**
 	 * Register new product
@@ -57,7 +51,7 @@ public class ProductController {
     }
     
 	/**
-	 * Delete product for id
+	 * Delete product by id
 	 * @param id
 	 */
     @DeleteMapping("/product/{id}")
@@ -78,17 +72,17 @@ public class ProductController {
     }
     
     /**
-     * Get product for id
+     * Get product by id
      * @param id
-     * @return
+     * @return ProductDTO
      */
     @GetMapping("/product/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
-    	Product product = productService.getProducById(id);
-    	if(product == null) {
-			return ResponseEntity.noContent().build();
-		}
-    	return ResponseEntity.ok(product);
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") int id) {
+      ProductDTO product = productService.getProducById(id);
+      if (product == null) {
+        return ResponseEntity.noContent().build();
+      }
+      return ResponseEntity.ok(product);
     }
 	
 }

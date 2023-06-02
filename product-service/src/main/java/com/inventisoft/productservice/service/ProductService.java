@@ -1,8 +1,11 @@
 package com.inventisoft.productservice.service;
 
+import com.inventisoft.productservice.dto.ProductDTO;
+import com.inventisoft.productservice.mapper.ProductMapper;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,7 @@ import com.inventisoft.productservice.repository.ProductRepository;
  */
 
 @Service
+@Slf4j
 public class ProductService {
 	
 	@Autowired
@@ -28,8 +32,9 @@ public class ProductService {
 	 * @return
 	 */
 	@Transactional
-	public List<Product> getAllProducts(){
-		return productRepository.findAll();
+	public List<ProductDTO> getAllProducts(){
+		List<ProductDTO> products = ProductMapper.INSTANCE.productListToProductDTOList(productRepository.findAll());
+		return products;
 	}
 	
 	/**
@@ -67,12 +72,14 @@ public class ProductService {
 	 * @return
 	 */
 	@Transactional
-	public Product getProducById(int productId) {
+	public ProductDTO getProducById(int productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
-            return product.get();
+					ProductDTO productDTO = ProductMapper.INSTANCE.productToProductDTO(product.get());
+          return productDTO;
         } else {
-            throw new RuntimeException("Category not found with id: " + productId);
+          log.error("Product not found with id: " + productId);
+					return null;
         }
     }
 
